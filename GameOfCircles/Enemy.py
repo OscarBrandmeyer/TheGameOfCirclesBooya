@@ -1,23 +1,44 @@
-class Enemy:
+import SpriteManager
+from Sprite import Sprite
+from Bullet import Bullet
+from Player import Player
+mark = 0
+wait = 1000
+go = True
+
+class Enemy(Sprite):
     
     speed = 8
     diameter = 50
-    c = color(0,0,255)
-    
-    def __init__(self, x, y, team):
-        self.x = x
-        self.y = y
-        self.team = team
-        
+    c = color(0, 0, 255)
+
     def move(self):
         self.x += self.speed
         if self.x < 0 or self.x > width:
             self.speed *= -1
         
-    def display(self):
-        fill(self.c)
-        ellipse(self.x, self.y, self.diameter, self.diameter)
+        vector = self.aim(SpriteManager.getPlayer())
+        self.fire(vector)
+
+    def aim(self, target):
+        # solve unit vector problem too
+        xcomp = target.x - self.x
+        ycomp = target.y - self.y
+        xVec = xcomp / 2 * .1
+        yVec = ycomp / 2 * .1
+        return PVector(xVec, yVec)
+         
+        d = ((self.x - target.x) ** 2 + (self.y - target.y) ** 2) ** .5
+    
+        return PVector(0, 10)
         
-    def animate(self):
-        self.move()
-        self.display()
+    def fire(self, vector):
+        
+        
+        global go, mark, wait
+        if(millis() - mark > wait):
+            go = not go
+            mark = millis()
+        if(go): 
+            SpriteManager.spawn(Bullet(self.x, self.y, vector, self.team))
+        
