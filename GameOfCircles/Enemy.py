@@ -6,6 +6,7 @@ mark = 0
 wait = 1000
 go = True
 
+
 class Enemy(Sprite):
     
     speed = 8
@@ -39,6 +40,7 @@ class Enemy(Sprite):
         if(millis() - mark > wait):
             go = not go
             mark = millis()
-        if(go): 
+        if(go):
+            go = False
             SpriteManager.spawn(Bullet(self.x, self.y, vector, self.team))
         

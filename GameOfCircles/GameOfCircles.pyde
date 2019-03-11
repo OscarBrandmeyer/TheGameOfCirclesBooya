@@ -37,13 +37,13 @@ def checkCollisions():
     global sprites
     for a in sprites:
         for b in sprites:
-           '''if a.team != b.team:
+            if a.team != b.team:
                 d = (pow(a.x - b.x, 2) + pow(a.y - b.y, 2))**(0.5)
                 r1 = a.diameter / 2
                 r2 = b.diameter / 2
                 if(r1 + r2 > d):
                     sprites.remove(a)
-                    sprites.remove(b)  '''
+                    sprites.remove(b) 
                     
     
 

@@ -6,6 +6,7 @@ class Sprite(object):
     def __init__(self, x, y, team):
         self.x = x
         self.y = y
+        
         self.team = team
         
     def move():
